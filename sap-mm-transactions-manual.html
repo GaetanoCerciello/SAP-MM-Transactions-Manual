@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuale Transazioni SAP MM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #0066cc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+        .search-box, .category-filter {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .filters {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manuale Transazioni SAP MM</h1>
+    
+    <div class="filters">
+        <input type="text" id="searchBox" class="search-box" placeholder="Cerca transazione...">
+        <select id="categoryFilter" class="category-filter">
+            <option value="">Tutte le categorie</option>
+            <option value="Acquisti">Acquisti</option>
+            <option value="Gestione scorte">Gestione scorte</option>
+            <option value="Dati anagrafici">Dati anagrafici</option>
+            <option value="Contratti">Contratti</option>
+            <option value="Programmazione consegne">Programmazione consegne</option>
+            <option value="Fatturazione">Fatturazione</option>
+        </select>
+    </div>
+    
+    <h2>Elenco Transazioni</h2>
+    <table id="transactionTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Codice</th>
+                <th onclick="sortTable(1)">Descrizione</th>
+                <th onclick="sortTable(2)">Categoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>ME21N</td><td>Creare ordine d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME22N</td><td>Modificare ordine d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME23N</td><td>Visualizzare ordine d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME28</td><td>Gestione ordini d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME51N</td><td>Creare richiesta d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME52N</td><td>Modificare richiesta d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME53N</td><td>Visualizzare richiesta d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME54N</td><td>Rilascio richieste d'acquisto</td><td>Acquisti</td></tr>
+            <tr><td>ME59N</td><td>Assegnazione automatica fonte di approvvigionamento</td><td>Acquisti</td></tr>
+            <tr><td>MIGO</td><td>Entrata merci</td><td>Gestione scorte</td></tr>
+            <tr><td>MIRO</td><td>Registrazione fattura logistica</td><td>Fatturazione</td></tr>
+            <tr><td>MB01</td><td>Registrazione entrata merci</td><td>Gestione scorte</td></tr>
+            <tr><td>MB11</td><td>Storno movimento materiale</td><td>Gestione scorte</td></tr>
+            <tr><td>MB1A</td><td>Registrazione uscita merci</td><td>Gestione scorte</td></tr>
+            <tr><td>MB1B</td><td>Trasferimento di magazzino</td><td>Gestione scorte</td></tr>
+            <tr><td>MB1C</td><td>Altri movimenti merci</td><td>Gestione scorte</td></tr>
+            <tr><td>MB51</td><td>Elenco movimenti materiali</td><td>Gestione scorte</td></tr>
+            <tr><td>MB52</td><td>Visualizzazione stock per magazzino</td><td>Gestione scorte</td></tr>
+            <tr><td>MB58</td><td>Visualizzazione stock per tipo di materiale</td><td>Gestione scorte</td></tr>
+            <tr><td>MMBE</td><td>Visualizzazione stock per magazzino/lotto</td><td>Gestione scorte</td></tr>
+            <tr><td>MM01</td><td>Creare anagrafica materiale</td><td>Dati anagrafici</td></tr>
+            <tr><td>MM02</td><td>Modificare anagrafica materiale</td><td>Dati anagrafici</td></tr>
+            <tr><td>MM03</td><td>Visualizzare anagrafica materiale</td><td>Dati anagrafici</td></tr>
+            <tr><td>MM06</td><td>Elenco anagrafiche materiali</td><td>Dati anagrafici</td></tr>
+            <tr><td>MK01</td><td>Creare anagrafica fornitore</td><td>Dati anagrafici</td></tr>
+            <tr><td>MK02</td><td>Modificare anagrafica fornitore</td><td>Dati anagrafici</td></tr>
+            <tr><td>MK03</td><td>Visualizzare anagrafica fornitore</td><td>Dati anagrafici</td></tr>
+            <tr><td>MR01</td><td>Creare record info</td><td>Dati anagrafici</td></tr>
+            <tr><td>MR02</td><td>Modificare record info</td><td>Dati anagrafici</td></tr>
+            <tr><td>MR03</td><td>Visualizzare record info</td><td>Dati anagrafici</td></tr>
+            <tr><td>ME11</td><td>Creare contratto</td><td>Contratti</td></tr>
+            <tr><td>ME12</td><td>Modificare contratto</td><td>Contratti</td></tr>
+            <tr><td>ME13</td><td>Visualizzare contratto</td><td>Contratti</td></tr>
+            <tr><td>ME31K</td><td>Creare programmazione consegne</td><td>Programmazione consegne</td></tr>
+            <tr><td>ME32K</td><td>Modificare programmazione consegne</td><td>Programmazione consegne</td></tr>
+            <tr><td>ME33K</td><td>Visualizzare programmazione consegne</td><td>Programmazione consegne</td></tr>
+            <tr><td>ML81N</td><td>Registrare fattura logistica</td><td>Fatturazione</td></tr>
+            <tr><td>ML82N</td><td>Modificare fattura logistica</td><td>Fatturazione</td></tr>
+            <tr><td>ML83N</td><td>Visualizzare fattura logistica</td><td>Fatturazione</td></tr>
+            <tr><td>MMIV</td><td>Verifica fattura</td><td>Fatturazione</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        function filterTable() {
+            var input, filter, categoryFilter, table, tr, td, i, txtValue, categoryValue;
+            input = document.getElementById("searchBox");
+            filter = input.value.toUpperCase();
+            categoryFilter = document.getElementById("categoryFilter");
+            categoryValue = categoryFilter.value;
+            table = document.getElementById("transactionTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                if (td.length > 0) {
+                    var matchesSearch = false;
+                    var matchesCategory = categoryValue === "" || td[2].textContent === categoryValue;
+                    
+                    for (var j = 0; j < td.length; j++) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            matchesSearch = true;
+                            break;
+                        }
+                    }
+                    
+                    if (matchesSearch && matchesCategory) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        document.getElementById('searchBox').addEventListener('keyup', filterTable);
+        document.getElementById('categoryFilter').addEventListener('change', filterTable);
+
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("transactionTable");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount ++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
